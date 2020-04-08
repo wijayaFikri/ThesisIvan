@@ -56,7 +56,7 @@
                 android:layout_weight="0.2"
                 android:textSize="19sp"
                 android:gravity="center"
-                android:text="Start Shopping"/>
+                android:text="Shop"/>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
