@@ -110,6 +110,7 @@
             android:background="@drawable/login_button_background"
             android:text="Login"
             android:textColor="#ffffff"
+            android:onClick="goLogin"
             tools:layout_editor_absoluteX="161dp"
             tools:layout_editor_absoluteY="566dp" />
         <View
