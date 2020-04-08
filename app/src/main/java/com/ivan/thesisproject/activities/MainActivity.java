@@ -38,4 +38,9 @@ public class MainActivity extends BaseActivity {
         startActivity(intent);
         finish();
     }
+
+    public void goOrderHistory(View view) {
+        Intent intent = new Intent(this,OrderHistoryActivity.class);
+        startActivity(intent);
+    }
 }

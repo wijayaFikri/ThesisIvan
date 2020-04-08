@@ -127,6 +127,7 @@
         app:layout_constraintHeight_percent="0.25"
         app:layout_constraintVertical_bias="0.8"
         app:layout_constraintHorizontal_bias="0.1"
+        android:onClick="goOrderHistory"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

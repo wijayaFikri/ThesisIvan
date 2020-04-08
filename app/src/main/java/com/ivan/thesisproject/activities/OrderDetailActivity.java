@@ -75,7 +75,7 @@ public class OrderDetailActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 final ProgressDialog dialog = ProgressDialog.show(context, "",
-                        "Logging in , please wait ...", true);
+                        "Sending order , please wait ...", true);
                 String address = addressEd.getText().toString();
                 if (address.equals("")){
                     addressEd.setError("Please fill the address");

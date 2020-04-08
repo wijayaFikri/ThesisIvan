@@ -108,4 +108,24 @@ public class MyRetrofit {
             }
         });
     }
+
+    public void getOrderHistory(int id, final CallApi<List<Order>> callApi){
+        ApiService apiService = retrofit.create(ApiService.class);
+        Call<LinkedHashTreeMap> call = apiService.getOrderHistory(id);
+        call.enqueue(new Callback<LinkedHashTreeMap>() {
+            @Override
+            public void onResponse(Call<LinkedHashTreeMap> call, Response<LinkedHashTreeMap> response) {
+                LinkedHashTreeMap map = response.body();
+                String ordersJson = new Gson().toJson(map.get("orders"));
+                List<Order> orderList = new Gson().fromJson(ordersJson,new TypeToken<List<Order>>()
+                {}.getType());
+                callApi.onSuccess(orderList);
+            }
+
+            @Override
+            public void onFailure(Call<LinkedHashTreeMap> call, Throwable t) {
+
+            }
+        });
+    }
 }
