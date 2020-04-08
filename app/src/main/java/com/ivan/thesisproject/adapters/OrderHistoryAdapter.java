@@ -48,7 +48,7 @@ public class OrderHistoryAdapter extends ArrayAdapter<Order> {
         assert  order != null;
         String totalItemLabel = String.valueOf(order.getProductList().size()) + " items";
         String totalPriceLabel = "Rp " + String.valueOf(order.getTotalPrice());
-        String orderDateLabel = order.getOrderDate().substring(0,10);
+        String orderDateLabel = order.getOrderDate();
 
         orderIdTv.setText(order.getId());
         totalPriceTv.setText(totalPriceLabel);
