@@ -39,31 +39,55 @@ public class MyRetrofit {
         getProductsCall.enqueue(new Callback<LinkedHashTreeMap>() {
             @Override
             public void onResponse(Call<LinkedHashTreeMap> call, Response<LinkedHashTreeMap> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     Gson gson = new Gson();
                     LinkedHashTreeMap map = response.body();
                     assert map != null;
                     List objectList = (List) map.get("products");
-                    List<Product> productList = gson.fromJson(gson.toJson(objectList), new TypeToken<List<Product>>()
-                    {}.getType());
+                    List<Product> productList = gson.fromJson(gson.toJson(objectList), new TypeToken<List<Product>>() {
+                    }.getType());
                     callApi.onSuccess(productList);
                 }
             }
 
             @Override
             public void onFailure(Call<LinkedHashTreeMap> call, Throwable t) {
-                System.out.println("Error occurred during getting the product , please check your internet connection");
+                System.out.println("Error occurred during retrieving the product , please check your internet connection");
             }
         });
     }
 
-    public void sendOrder(Order order , final CallApi<String> callApi){
+    public void getAllCategory(final CallApi<List<String>> callApi) {
+        ApiService apiService = retrofit.create(ApiService.class);
+        Call<LinkedHashTreeMap> getCategoryCall = apiService.getAllCategory();
+        getCategoryCall.enqueue(new Callback<LinkedHashTreeMap>() {
+            @Override
+            public void onResponse(Call<LinkedHashTreeMap> call, Response<LinkedHashTreeMap> response) {
+                if (response.isSuccessful()) {
+                    Gson gson = new Gson();
+                    LinkedHashTreeMap map = response.body();
+                    assert map != null;
+                    List objectList = (List) map.get("categories");
+                    List<String> categoryList = gson.fromJson(gson.toJson(objectList), new TypeToken<List<String>>() {
+                    }.getType());
+                    callApi.onSuccess(categoryList);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LinkedHashTreeMap> call, Throwable t) {
+                System.out.println("Error occurred during retrieving the categories , please check your internet connection");
+            }
+        });
+    }
+
+    public void sendOrder(Order order, final CallApi<String> callApi) {
         ApiService apiService = retrofit.create(ApiService.class);
         Call<LinkedHashTreeMap> getProductsCall = apiService.sendOrder(order);
         getProductsCall.enqueue(new Callback<LinkedHashTreeMap>() {
             @Override
             public void onResponse(Call<LinkedHashTreeMap> call, Response<LinkedHashTreeMap> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     callApi.onSuccess("Order placed successfully");
                 } else {
                     callApi.onFailed("Something wrong happened when we try to put order, " +
@@ -73,14 +97,14 @@ public class MyRetrofit {
 
             @Override
             public void onFailure(Call<LinkedHashTreeMap> call, Throwable t) {
-                    callApi.onFailed("Something wrong happened when we try to put order, " +
-                            "please try again later");
+                callApi.onFailed("Something wrong happened when we try to put order, " +
+                        "please try again later");
                 System.out.println(t.getMessage());
             }
         });
     }
 
-    public void userLogin(UserAuth userAuth , final CallApi<Boolean> callApi){
+    public void userLogin(UserAuth userAuth, final CallApi<Boolean> callApi) {
         ApiService apiService = retrofit.create(ApiService.class);
         Call<LinkedHashTreeMap> userLoginCall = apiService.userLogin(userAuth);
         userLoginCall.enqueue(new Callback<LinkedHashTreeMap>() {
@@ -90,11 +114,11 @@ public class MyRetrofit {
                     Gson gson = new Gson();
                     LinkedHashTreeMap result = response.body();
                     assert result != null;
-                    User user = gson.fromJson(gson.toJson(result.get("user")),User.class);
+                    User user = gson.fromJson(gson.toJson(result.get("user")), User.class);
                     assert user != null;
-                    if (user.getUsername() != null && !user.getUsername().equals("")){
+                    if (user.getUsername() != null && !user.getUsername().equals("")) {
                         SharedPrefUtils sharedPrefUtils = new SharedPrefUtils(sharedPreferences);
-                        sharedPrefUtils.save(SharedPrefKey.USER_KEY,new Gson().toJson(user));
+                        sharedPrefUtils.save(SharedPrefKey.USER_KEY, new Gson().toJson(user));
                         callApi.onSuccess(Boolean.TRUE);
                     } else {
                         callApi.onFailed("Wrong username or password");
@@ -104,12 +128,12 @@ public class MyRetrofit {
 
             @Override
             public void onFailure(Call<LinkedHashTreeMap> call, Throwable t) {
-                        callApi.onFailed("Something went wrong , please check your internet connection");
+                callApi.onFailed("Something went wrong , please check your internet connection");
             }
         });
     }
 
-    public void getOrderHistory(int id, final CallApi<List<Order>> callApi){
+    public void getOrderHistory(int id, final CallApi<List<Order>> callApi) {
         ApiService apiService = retrofit.create(ApiService.class);
         Call<LinkedHashTreeMap> call = apiService.getOrderHistory(id);
         call.enqueue(new Callback<LinkedHashTreeMap>() {
@@ -117,14 +141,38 @@ public class MyRetrofit {
             public void onResponse(Call<LinkedHashTreeMap> call, Response<LinkedHashTreeMap> response) {
                 LinkedHashTreeMap map = response.body();
                 String ordersJson = new Gson().toJson(map.get("orders"));
-                List<Order> orderList = new Gson().fromJson(ordersJson,new TypeToken<List<Order>>()
-                {}.getType());
+                List<Order> orderList = new Gson().fromJson(ordersJson, new TypeToken<List<Order>>() {
+                }.getType());
                 callApi.onSuccess(orderList);
             }
 
             @Override
             public void onFailure(Call<LinkedHashTreeMap> call, Throwable t) {
 
+            }
+        });
+    }
+
+    public void getAllProductByFilter(String filter, final CallApi<List<Product>> callApi) {
+        ApiService apiService = retrofit.create(ApiService.class);
+        Call<LinkedHashTreeMap> getProductsCall = apiService.getAllProductByFilter(filter);
+        getProductsCall.enqueue(new Callback<LinkedHashTreeMap>() {
+            @Override
+            public void onResponse(Call<LinkedHashTreeMap> call, Response<LinkedHashTreeMap> response) {
+                if (response.isSuccessful()) {
+                    Gson gson = new Gson();
+                    LinkedHashTreeMap map = response.body();
+                    assert map != null;
+                    List objectList = (List) map.get("products");
+                    List<Product> productList = gson.fromJson(gson.toJson(objectList), new TypeToken<List<Product>>() {
+                    }.getType());
+                    callApi.onSuccess(productList);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LinkedHashTreeMap> call, Throwable t) {
+                System.out.println("Error occurred during retrieving the product , please check your internet connection");
             }
         });
     }

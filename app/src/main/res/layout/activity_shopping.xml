@@ -1,19 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.ShoppingActivity">
 
-    <GridView
-        android:paddingTop="16dp"
-        android:id="@+id/shopping_grid_view"
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <GridView
+            android:id="@+id/shopping_grid_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:columnWidth="160dp"
+            android:numColumns="2"
+            android:paddingTop="16dp"
+            android:stretchMode="spacingWidthUniform"
+            android:verticalSpacing="16dp">
+        </GridView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:columnWidth="160dp"
-        android:verticalSpacing="16dp"
-        android:numColumns="2"
-        android:stretchMode="spacingWidthUniform">
-    </GridView>
-</RelativeLayout>
+        android:layout_height="wrap_content"
+        app:layout_constraintVertical_bias="0.95"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_sort_black_24dp"
+            android:paddingHorizontal="8dp"
+            android:drawableTint="@color/colorPrimary"
+            android:textColor="@color/colorPrimary"
+            android:background="@drawable/shopping_sort_button"
+            android:text="Sort"
+            android:onClick="goSort"/>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"/>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_apps_black_24dp"
+            android:drawableTint="@color/colorPrimary"
+            android:textColor="@color/colorPrimary"
+            android:drawablePadding="4dp"
+            android:paddingHorizontal="8dp"
+            android:onClick="goCategory"
+            android:background="@drawable/shopping_category_button"
+            android:text="Category"/>
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

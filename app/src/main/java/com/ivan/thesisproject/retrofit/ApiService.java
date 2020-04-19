@@ -16,6 +16,9 @@ public interface ApiService {
     @GET("/mobile/products")
     Call<LinkedHashTreeMap> getAllProduct();
 
+    @GET("mobile/get/category")
+    Call<LinkedHashTreeMap> getAllCategory();
+
     @POST("/mobile/create/order")
     Call<LinkedHashTreeMap> sendOrder(@Body Order order);
 
@@ -25,4 +28,8 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("mobile/order/history")
     Call<LinkedHashTreeMap> getOrderHistory(@Field("userId") int UserId);
+
+    @FormUrlEncoded
+    @POST("/mobile/products")
+    Call<LinkedHashTreeMap> getAllProductByFilter(@Field("filter") String filter);
 }

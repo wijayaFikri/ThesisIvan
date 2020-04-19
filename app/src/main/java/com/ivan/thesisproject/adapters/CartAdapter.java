@@ -116,22 +116,6 @@ public class CartAdapter extends ArrayAdapter<Product> {
             }
         });
 
-/*        productQuantityEd.setOnKeyListener(new View.OnKeyListener() {
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (event.getAction() == KeyEvent.ACTION_DOWN
-                        && (keyCode == KeyEvent.KEYCODE_ENTER || keyCode == KeyEvent.KEYCODE_BACK)) {
-                    String quantity = productQuantityEd.getText().toString();
-                    product.setOrderQuantity(quantity);
-                    cartList.set(cartList.indexOf(product), product);
-                    sharedPrefUtils.save(SharedPrefKey.CART_KEY, new Gson().toJson(cartList));
-                    productQuantityEd.setText(quantity);
-                    ((CartActivity) mContext).setTotalPrice();
-                    return true;
-                }
-                return false;
-            }
-        });*/
-
         productQuantityEd.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
