@@ -14,11 +14,13 @@ import com.ivan.thesisproject.utilities.SharedPrefUtils;
 
 import java.util.List;
 
+import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Multipart;
 
 public class MyRetrofit {
     private Retrofit retrofit;
@@ -106,6 +108,7 @@ public class MyRetrofit {
 
     public void userLogin(UserAuth userAuth, final CallApi<Boolean> callApi) {
         ApiService apiService = retrofit.create(ApiService.class);
+        System.out.println(new Gson().toJson(userAuth));
         Call<LinkedHashTreeMap> userLoginCall = apiService.userLogin(userAuth);
         userLoginCall.enqueue(new Callback<LinkedHashTreeMap>() {
             @Override
@@ -173,6 +176,22 @@ public class MyRetrofit {
             @Override
             public void onFailure(Call<LinkedHashTreeMap> call, Throwable t) {
                 System.out.println("Error occurred during retrieving the product , please check your internet connection");
+            }
+        });
+    }
+
+    public void uploadPaymentEvidence(MultipartBody.Part part, String id, final CallApi<String> callApi) {
+        ApiService apiService = retrofit.create(ApiService.class);
+        Call<LinkedHashTreeMap> uploadEvidenceCall = apiService.uploadPaymentEvidence(part, id);
+        uploadEvidenceCall.enqueue(new Callback<LinkedHashTreeMap>() {
+            @Override
+            public void onResponse(Call<LinkedHashTreeMap> call, Response<LinkedHashTreeMap> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<LinkedHashTreeMap> call, Throwable t) {
+
             }
         });
     }

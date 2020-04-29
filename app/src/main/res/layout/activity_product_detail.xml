@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.ProductDetailActivity">
+
+    <ImageView
+        android:id="@+id/product_detail_imageView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.45"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.55"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/product_detail_name_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="32sp"
+            android:layout_margin="16dp"
+            android:text="PRODUCT_NAME"/>
+        <TextView
+            android:id="@+id/product_detail_price_textView"
+            android:layout_marginHorizontal="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:textColor="@color/colorPrimary"
+            android:text="Rp -"/>
+
+        <TextView
+            android:id="@+id/product_detail_vendor_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="vendor_name"
+            android:drawablePadding="4dp"
+            android:gravity="center"
+            android:textSize="24sp"
+            android:drawableStart="@drawable/ic_store_black_64dp"
+            android:drawableTint="@color/transparentBlack"
+            android:layout_marginBottom="8dp"
+            android:paddingHorizontal="16dp"/>
+
+        <LinearLayout
+            android:layout_marginTop="64dp"
+            android:paddingHorizontal="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:onClick="buyProduct"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/login_button_background"
+                android:textColor="#fff"
+                android:layout_marginEnd="8dp"
+                android:text="Buy"/>
+            <Button
+                android:id="@+id/product_detail_addToCart"
+                android:onClick="addProductToCart"
+                android:paddingHorizontal="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:background="@drawable/shopping_category_button"
+                android:text="Add To Cart"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,6 +1,7 @@
 package com.ivan.thesisproject.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -17,10 +18,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.ivan.thesisproject.R;
+import com.ivan.thesisproject.activities.ProductDetailActivity;
 import com.ivan.thesisproject.models.Product;
 import com.ivan.thesisproject.utilities.SharedPrefKey;
 import com.ivan.thesisproject.utilities.SharedPrefUtils;
@@ -60,6 +63,7 @@ public class ProductGridAdapter extends ArrayAdapter<Product> {
         TextView productNameTv = v.findViewById(R.id.gridItem_shopping_productName);
         TextView productPriceTv = v.findViewById(R.id.gridItem_shopping_productPrice);
         TextView productVendorTv = v.findViewById(R.id.gridItem_shopping_productVendor);
+        CardView cv = v.findViewById(R.id.gridItem_shopping_cardView);
         final ImageView productImageView = v.findViewById(R.id.gridItem_shopping_image);
         final Button addProductButton = v.findViewById(R.id.gridItem_shopping_addButton);
 
@@ -105,6 +109,15 @@ public class ProductGridAdapter extends ArrayAdapter<Product> {
                 addProductButton.setClickable(Boolean.FALSE);
                 addProductButton.setBackground(mContext.getResources().getDrawable(R.drawable.form_background));
                 addProductButton.setTextColor(Color.GRAY);
+            }
+        });
+
+        cv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, ProductDetailActivity.class);
+                intent.putExtra("product", new Gson().toJson(product));
+                mContext.startActivity(intent);
             }
         });
 

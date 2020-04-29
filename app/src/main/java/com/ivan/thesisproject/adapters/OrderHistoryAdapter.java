@@ -1,6 +1,7 @@
 package com.ivan.thesisproject.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,8 +10,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 
+import com.google.gson.Gson;
 import com.ivan.thesisproject.R;
+import com.ivan.thesisproject.activities.OrderHistoryDetailActivity;
 import com.ivan.thesisproject.models.Order;
 
 import java.util.List;
@@ -49,6 +53,16 @@ public class OrderHistoryAdapter extends ArrayAdapter<Order> {
         String totalItemLabel = String.valueOf(order.getProductList().size()) + " items";
         String totalPriceLabel = "Rp " + String.valueOf(order.getTotalPrice());
         String orderDateLabel = order.getOrderDate();
+
+        CardView cv = v.findViewById(R.id.historyOrder_order_card);
+        cv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, OrderHistoryDetailActivity.class);
+                intent.putExtra("order",new Gson().toJson(order));
+                mContext.startActivity(intent);
+            }
+        });
 
         orderIdTv.setText(order.getId());
         totalPriceTv.setText(totalPriceLabel);

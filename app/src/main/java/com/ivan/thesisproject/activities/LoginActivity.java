@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
         EditText usernameEt = findViewById(R.id.login_username_editText);
         EditText passwordEt = findViewById(R.id.login_password_editText);
         String username = usernameEt.getText().toString();
-        String password = usernameEt.getText().toString();
+        String password = passwordEt.getText().toString();
         if (username.equals("")) {
             usernameEt.setError("Username can't be empty");
             return;
