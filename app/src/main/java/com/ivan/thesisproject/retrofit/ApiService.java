@@ -38,5 +38,5 @@ public interface ApiService {
 
     @Multipart
     @POST("/mobile/get/evidence")
-    Call<LinkedHashTreeMap> uploadPaymentEvidence(@Part MultipartBody.Part filePart, @Part("id") String id);
+    Call<LinkedHashTreeMap> uploadPaymentEvidence(@Part MultipartBody.Part filePart, @Part("id") long id);
 }

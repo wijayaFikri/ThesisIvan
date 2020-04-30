@@ -28,6 +28,7 @@ public class MyRetrofit {
 
     public MyRetrofit(SharedPreferences sharedPreferences) {
         String BASE_URL = "https://thesis-ivan.herokuapp.com/";
+        //TEMPURL http://192.168.0.111/ || asli https://thesis-ivan.herokuapp.com/
         retrofit = new Retrofit.Builder().
                 baseUrl(BASE_URL).
                 addConverterFactory(GsonConverterFactory.create()).
@@ -182,16 +183,20 @@ public class MyRetrofit {
 
     public void uploadPaymentEvidence(MultipartBody.Part part, String id, final CallApi<String> callApi) {
         ApiService apiService = retrofit.create(ApiService.class);
-        Call<LinkedHashTreeMap> uploadEvidenceCall = apiService.uploadPaymentEvidence(part, id);
+        Call<LinkedHashTreeMap> uploadEvidenceCall = apiService.uploadPaymentEvidence(part, Long.parseLong(id));
         uploadEvidenceCall.enqueue(new Callback<LinkedHashTreeMap>() {
             @Override
             public void onResponse(Call<LinkedHashTreeMap> call, Response<LinkedHashTreeMap> response) {
-
+                if (response.isSuccessful()) {
+                    callApi.onSuccess("Success");
+                }
             }
 
             @Override
             public void onFailure(Call<LinkedHashTreeMap> call, Throwable t) {
-
+                System.out.println(t.getMessage());
+                callApi.onFailed("Error occured during sending evidence of payment," +
+                        "please check your internet connection");
             }
         });
     }

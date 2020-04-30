@@ -17,6 +17,8 @@ public class Order {
     private int totalPrice;
     @SerializedName("order_date")
     private String orderDate;
+    @SerializedName("image_url")
+    private String imageUrl;
 
     public Order(){
         //empty constructor
@@ -82,5 +84,13 @@ public class Order {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
