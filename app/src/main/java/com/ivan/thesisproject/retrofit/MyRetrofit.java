@@ -28,7 +28,7 @@ public class MyRetrofit {
 
     public MyRetrofit(SharedPreferences sharedPreferences) {
         String BASE_URL = "https://thesis-ivan.herokuapp.com/";
-        //TEMPURL http://192.168.0.111/ || asli https://thesis-ivan.herokuapp.com/
+        //TEMPURL http://192.168.0.111:8080/ || asli https://thesis-ivan.herokuapp.com/
         retrofit = new Retrofit.Builder().
                 baseUrl(BASE_URL).
                 addConverterFactory(GsonConverterFactory.create()).
@@ -55,6 +55,7 @@ public class MyRetrofit {
 
             @Override
             public void onFailure(Call<LinkedHashTreeMap> call, Throwable t) {
+                callApi.onFailed("Error occurred during retrieving the product , please check your internet connection");
                 System.out.println("Error occurred during retrieving the product , please check your internet connection");
             }
         });
@@ -79,6 +80,7 @@ public class MyRetrofit {
 
             @Override
             public void onFailure(Call<LinkedHashTreeMap> call, Throwable t) {
+                callApi.onFailed("Error occurred during retrieving the categories , please check your internet connection");
                 System.out.println("Error occurred during retrieving the categories , please check your internet connection");
             }
         });
@@ -152,7 +154,7 @@ public class MyRetrofit {
 
             @Override
             public void onFailure(Call<LinkedHashTreeMap> call, Throwable t) {
-
+                callApi.onFailed("Error occurred during retrieving the order history , please check your internet connection");
             }
         });
     }
@@ -177,6 +179,7 @@ public class MyRetrofit {
             @Override
             public void onFailure(Call<LinkedHashTreeMap> call, Throwable t) {
                 System.out.println("Error occurred during retrieving the product , please check your internet connection");
+                callApi.onFailed("Error occurred during retrieving the product , please check your internet connection");
             }
         });
     }

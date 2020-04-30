@@ -81,6 +81,16 @@ public class ShoppingActivity extends BaseActivity {
 
     public void goSort(View view) {
         Intent intent = new Intent(this, SortActivity.class);
+        String filter;
+        Bundle extras = getIntent().getExtras();
+        if (extras == null) {
+            filter = null;
+        } else {
+            filter = extras.getString("filter");
+        }
+        if (filter != null) {
+            intent.putExtra("filter",filter);
+        }
         startActivity(intent);
     }
 
