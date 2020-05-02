@@ -83,33 +83,8 @@ public class OrderHistoryDetailActivity extends AppCompatActivity {
             }
         });
 
-        final Target target = new Target() {
-            @Override
-            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                imageView.setImageBitmap(bitmap);
-            }
-
-            @Override
-            public void onBitmapFailed(Exception e, Drawable errorDrawable) {
-
-            }
-
-            @Override
-            public void onPrepareLoad(Drawable placeHolderDrawable) {
-
-            }
-        };
         if (order.getImageUrl() != null && !order.getImageUrl().equals("")) {
-            Handler uiHandler = new Handler(Looper.getMainLooper());
-            uiHandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    // Get image from data Notification
-                    Picasso.get()
-                            .load(order.getImageUrl())
-                            .into(target);
-                }
-            });
+            Picasso.get().load(order.getImageUrl()).into(imageView);
         }
     }
 

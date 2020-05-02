@@ -121,7 +121,9 @@ public class ProductGridAdapter extends ArrayAdapter<Product> {
             }
         });
 
-        final Target target = new Target() {
+        Picasso.get().load(product.getImageUrl()).into(productImageView);
+
+        /*final Target target = new Target() {
             @Override
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                 productImageView.setImageBitmap(bitmap);
@@ -147,7 +149,7 @@ public class ProductGridAdapter extends ArrayAdapter<Product> {
                         .load(product.getImageUrl())
                         .into(target);
             }
-        });
+        });*/
         return v;
     }
 }
