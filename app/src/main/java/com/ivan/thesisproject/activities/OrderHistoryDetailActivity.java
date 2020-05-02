@@ -99,17 +99,18 @@ public class OrderHistoryDetailActivity extends AppCompatActivity {
 
             }
         };
-
-        Handler uiHandler = new Handler(Looper.getMainLooper());
-        uiHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                // Get image from data Notification
-                Picasso.get()
-                        .load(order.getImageUrl())
-                        .into(target);
-            }
-        });
+        if (order.getImageUrl() != null && !order.getImageUrl().equals("")) {
+            Handler uiHandler = new Handler(Looper.getMainLooper());
+            uiHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    // Get image from data Notification
+                    Picasso.get()
+                            .load(order.getImageUrl())
+                            .into(target);
+                }
+            });
+        }
     }
 
     @Override
